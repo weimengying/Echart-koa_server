@@ -2,7 +2,7 @@
 Vue+ECharts来展示电商平台数据
 前端技术栈采用Vue+VueRouter+Axios+Echarts
 后端技术栈采用Node.js+koa组成
-#前端
+### 前端
 前端项目：vision
 ## Project setup
 ```
@@ -27,7 +27,7 @@ npm run lint
 后端服务：koa_server
 npm install
 node app.js
-#项目效果图
+### 项目效果图
 
 ## 功能
 - [x] 商家销售统计图表模块
