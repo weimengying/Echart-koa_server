@@ -22,6 +22,10 @@ export default {
     // 在页面加载完成的时候, 主动进行屏幕的适配
     this.screenAdapter()
   },
+  destoryed () {
+    window.removeEventListener('resize', this.screenAdapter)
+    clearInterval(this.timerId)
+  },
   methods: {
     initChart() {
       this.chartInstance = this.$echarts.init(this.$refs.rank_ref, 'chalk')
