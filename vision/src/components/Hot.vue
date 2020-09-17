@@ -1,8 +1,9 @@
 g<template>
   <div class="com-container">
     <div class="com-chart" ref="hot_ref"></div>
-    <div class="iconfont arr_left">&#xe6ef;</div>
-    <div class="iconfont arr_right"></div>
+    <span class="iconfont arr_left" @click="toLeft">&#xe6ef;</span>
+    <span class="iconfont arr_right" @click="toRight">&#xe6ed;</span>
+    <span class="cat-name"></span>
   </div>
 </template>
 
@@ -12,7 +13,9 @@ export default {
   data() {
     return {
       chartInstance: null,
-      allData: null
+      allData: null,
+      currentIndex: 0, // 当前所展示出的一级分类数据
+      titleFontSize: 0
     }
   },
   mounted() {
@@ -50,10 +53,10 @@ export default {
     },
     updateChart() {
       // 处理图表需要的数据
-      const legendData = this.allData[0].children.map(item => {
+      const legendData = this.allData[this.currentIndex].children.map(item => {
         return item.name
       })
-      const seriesData = this.allData[0].children.map(item => {
+      const seriesData = this.allData[this.currentIndex].children.map(item => {
         return {
           name: item.name,
           value: item.value
@@ -75,10 +78,40 @@ export default {
       const adapterOption = {}
       this.chartInstance.setOption(adapterOption)
       this.chartInstance.resize()
+    },
+    toLeft() {
+      this.currentIndex--
+      if (this.currentIndex < 0) {
+        this.currentIndex = this.allData.length
+      }
+      this.updateChart()
+    },
+    toRight() {
+      this.currentIndex++
+      if (this.currentIndex > this.allData.length - 1) {
+        this.currentIndex = 0
+      }
+      this.updateChart()
     }
   }
 }
 </script>
 
-<style>
+<style lang="less" scoped>
+.arr_left{
+    position: absolute;
+    left:10%;
+    top:50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #fff;
+}
+.arr_right{
+    position: absolute;
+    right:10%;
+    top:50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #fff;
+}
 </style>
