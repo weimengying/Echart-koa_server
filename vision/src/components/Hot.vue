@@ -1,4 +1,4 @@
-<template>
+g<template>
   <div class="com-container">
     <div class="com-chart" ref="hot_ref"></div>
     <div class="iconfont arr_left">&#xe6ef;</div>
